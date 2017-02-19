@@ -23,9 +23,14 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var questionField: UILabel!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
+    
+    // Buttons
+    @IBOutlet weak var answer1: UIButton!
+    @IBOutlet weak var answer2: UIButton!
+    @IBOutlet weak var answer3: UIButton!
+    @IBOutlet weak var answer4: UIButton!
+    
     
 
     override func viewDidLoad() {
@@ -48,12 +53,20 @@ class ViewController: UIViewController {
         let questionDictionary = trivia[indexOfSelectedQuestion]
         questionField.text = questionDictionary.question
         playAgainButton.isHidden = true
+        
+        // change text on answerbuttons to match answer options in the current question
+        answer1.setTitle(questionDictionary.option1, for: .normal)
+        answer2.setTitle(questionDictionary.option2, for: .normal)
+        answer3.setTitle(questionDictionary.option3, for: .normal)
+        answer4.setTitle(questionDictionary.option4, for: .normal)
     }
     
     func displayScore() {
         // Hide the answer buttons
-        trueButton.isHidden = true
-        falseButton.isHidden = true
+        answer1.isHidden = true
+        answer2.isHidden = true
+        answer3.isHidden = true
+        answer4.isHidden = true
         
         // Display play again button
         playAgainButton.isHidden = false
@@ -69,7 +82,10 @@ class ViewController: UIViewController {
         let selectedQuestionDict = trivia[indexOfSelectedQuestion]
         let correctAnswer = selectedQuestionDict.answer
         
-        if (sender === trueButton &&  correctAnswer == "True") || (sender === falseButton && correctAnswer == "False") {
+        if (sender === answer1 && correctAnswer == 1) || (sender === answer2 && correctAnswer == 2) {
+            correctQuestions += 1
+            questionField.text = "Correct!"
+        } else if (sender === answer3 && correctAnswer == 3) || (sender === answer4 && correctAnswer == 4) {
             correctQuestions += 1
             questionField.text = "Correct!"
         } else {
@@ -91,8 +107,10 @@ class ViewController: UIViewController {
     
     @IBAction func playAgain() {
         // Show the answer buttons
-        trueButton.isHidden = false
-        falseButton.isHidden = false
+        answer1.isHidden = false
+        answer2.isHidden = false
+        answer3.isHidden = false
+        answer4.isHidden = false
         
         questionsAsked = 0
         correctQuestions = 0
