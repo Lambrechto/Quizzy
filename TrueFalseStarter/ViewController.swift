@@ -11,6 +11,7 @@ import GameKit
 import AudioToolbox
 
 class ViewController: UIViewController {
+   
     
     let questionsPerRound = 4
     var questionsAsked = 0
@@ -19,13 +20,13 @@ class ViewController: UIViewController {
     
     var gameSound: SystemSoundID = 0
     
-    let trivia = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10]
+    var trivia = triviaAll
 
     
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var playAgainButton: UIButton!
     
-    // Buttons
+    // Answer Buttons
     @IBOutlet weak var answer1: UIButton!
     @IBOutlet weak var answer2: UIButton!
     @IBOutlet weak var answer3: UIButton!
@@ -53,6 +54,9 @@ class ViewController: UIViewController {
         let questionDictionary = trivia[indexOfSelectedQuestion]
         questionField.text = questionDictionary.question
         playAgainButton.isHidden = true
+        
+        
+        
         
         // change text on answerbuttons to match answer options in the current question
         answer1.setTitle(questionDictionary.option1, for: .normal)
@@ -92,7 +96,9 @@ class ViewController: UIViewController {
             questionField.text = "Sorry, wrong answer!"
         }
         
+        trivia.remove(at: indexOfSelectedQuestion)
         loadNextRoundWithDelay(seconds: 2)
+        
     }
     
     func nextRound() {
@@ -115,6 +121,8 @@ class ViewController: UIViewController {
         questionsAsked = 0
         correctQuestions = 0
         nextRound()
+        
+        trivia = triviaAll
     }
     
 
@@ -142,5 +150,5 @@ class ViewController: UIViewController {
     func playGameStartSound() {
         AudioServicesPlaySystemSound(gameSound)
     }
-}
+    }
 

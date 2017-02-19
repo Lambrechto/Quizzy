@@ -40,3 +40,8 @@ let question7 = Question.init(question: "Which of the following rivers is longes
 let question8 = Question.init(question: "Which city is the oldest?", option1: "Mexico City", option2: "Cape Town", option3: "San Juan", option4: "Sydney", answer: 1)
 let question9 = Question.init(question: "Which country was the first to allow women to vote in national elections?", option1: "Poland", option2: "United States", option3: "Sweden", option4: "Senegal", answer: 1)
 let question10 = Question.init(question: "Which of these countries won the most medals in the 2012 Summer Games?", option1: "France", option2: "Germany", option3: "Japan", option4: "Great Britian", answer: 4)
+
+
+var triviaAll = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10]
+
+
