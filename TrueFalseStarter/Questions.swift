@@ -14,11 +14,11 @@ class Question {
     var option1: String
     var option2: String
     var option3: String
-    var option4: String
+    var option4: String?
     
     var answer: Int
     
-    init(question: String, option1: String, option2: String, option3: String, option4: String, answer: Int) {
+    init(question: String, option1: String, option2: String, option3: String, option4: String?, answer: Int) {
         self.question = question
         self.option1 = option1
         self.option2 = option2
@@ -26,6 +26,7 @@ class Question {
         self.option4 = option4
         self.answer = answer
     }
+    
 }
 
 
@@ -40,8 +41,9 @@ let question7 = Question.init(question: "Which of the following rivers is longes
 let question8 = Question.init(question: "Which city is the oldest?", option1: "Mexico City", option2: "Cape Town", option3: "San Juan", option4: "Sydney", answer: 1)
 let question9 = Question.init(question: "Which country was the first to allow women to vote in national elections?", option1: "Poland", option2: "United States", option3: "Sweden", option4: "Senegal", answer: 1)
 let question10 = Question.init(question: "Which of these countries won the most medals in the 2012 Summer Games?", option1: "France", option2: "Germany", option3: "Japan", option4: "Great Britian", answer: 4)
+let question11 = Question.init(question: "Who made the first call to the moon?", option1: "Richard Nixon", option2: "Selena Gomez", option3: "Eddie Murphy", option4: nil, answer: 0)
 
 
-var triviaAll = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10]
+var triviaAll = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11]
 
 

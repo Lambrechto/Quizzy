@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     var gameSound: SystemSoundID = 0
     
     var trivia = triviaAll
+    
+    let tintWrong = UIColor(red: 255, green: 255, blue: 255, alpha: 0.35)
+    let tintRight = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
 
     
     @IBOutlet weak var questionField: UILabel!
@@ -55,15 +58,27 @@ class ViewController: UIViewController {
         questionField.text = questionDictionary.question
         playAgainButton.isHidden = true
         
-        
-        
+
+        if questionDictionary.option4 == nil {
+            answer4.isEnabled = false
+        } else {
+            answer4.isEnabled = true
+        }
         
         // change text on answerbuttons to match answer options in the current question
         answer1.setTitle(questionDictionary.option1, for: .normal)
         answer2.setTitle(questionDictionary.option2, for: .normal)
         answer3.setTitle(questionDictionary.option3, for: .normal)
         answer4.setTitle(questionDictionary.option4, for: .normal)
+        
+        // Change button text.tintColor to normal
+        answer1.tintColor = tintRight
+        answer2.tintColor = tintRight
+        answer3.tintColor = tintRight
+        answer4.tintColor = tintRight
     }
+    
+    
     
     func displayScore() {
         // Hide the answer buttons
@@ -86,6 +101,7 @@ class ViewController: UIViewController {
         let selectedQuestionDict = trivia[indexOfSelectedQuestion]
         let correctAnswer = selectedQuestionDict.answer
         
+        
         if (sender === answer1 && correctAnswer == 1) || (sender === answer2 && correctAnswer == 2) {
             correctQuestions += 1
             questionField.text = "Correct!"
@@ -94,7 +110,18 @@ class ViewController: UIViewController {
             questionField.text = "Correct!"
         } else {
             questionField.text = "Sorry, wrong answer!"
+            
         }
+        
+        switch selectedQuestionDict.answer {
+        case 1: answer2.tintColor = tintWrong; answer3.tintColor = tintWrong; answer4.tintColor = tintWrong
+        case 2: answer1.tintColor = tintWrong; answer3.tintColor = tintWrong; answer4.tintColor = tintWrong
+        case 3: answer1.tintColor = tintWrong; answer2.tintColor = tintWrong; answer4.tintColor = tintWrong
+        case 4: answer1.tintColor = tintWrong; answer2.tintColor = tintWrong; answer3.tintColor = tintWrong
+        default:
+            print("this is not possible")
+        }
+        
         
         trivia.remove(at: indexOfSelectedQuestion)
         loadNextRoundWithDelay(seconds: 2)
